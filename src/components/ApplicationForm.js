@@ -1,7 +1,13 @@
 import React from 'react';
+import ApplicationField from './ApplicationField'
+
+
 
 export default function ApplicationForm(props) {
     return (
-    <h1>Hello {props.name}</h1>
+        <div className='application-form'>
+            <h1>{props.name}</h1>
+            <ApplicationField title='Имя' />
+        </div>
     );
 }

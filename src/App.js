@@ -4,7 +4,7 @@ import ApplicationForm from './components/ApplicationForm'
 function App() {
   return (
     <div className="wrapper">
-        <ApplicationForm name='some' />
+        <ApplicationForm name='Регистрация нового участника' />
     </div>
   );
 }
