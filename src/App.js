@@ -1,12 +1,10 @@
 import React from 'react';
-import './App.scss';
-
-import './components/ApplicationForm'
+import ApplicationForm from './components/ApplicationForm'
 
 function App() {
   return (
-    <div className="App">
-        <ApplicationForm name='some' />;
+    <div className="wrapper">
+        <ApplicationForm name='some' />
     </div>
   );
 }
