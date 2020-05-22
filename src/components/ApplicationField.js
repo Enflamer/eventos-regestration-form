@@ -8,7 +8,7 @@ export default function ApplicationField(props){
             </div>
             <input 
                 type='text'
-                placeholder='Type here'
+                className='application-field__field'
             />
         </div>
     );
