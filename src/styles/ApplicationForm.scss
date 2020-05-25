@@ -1,24 +1,21 @@
 .application {
-    width: 100%;
-
-    
-
     &-form{
+        padding: 50px;
         &__title {
-           text-align: center;
-           //font-family: 'Montserrat', sans-serif;
-           font-family: 'Futura PT', sans-serif;
+            //font-family: 'Montserrat', sans-serif;
+            font-family: 'Futura PT', sans-serif;
         }
 
         &-buttons {
-            width: 500px;
-            margin: 30px auto;
+            width: 525px;
+            margin: 40px auto 0 auto;
         }
     }
 
     &-field {
+        display: inline-block;
         margin: 20px auto;
-        width: 500px;
+        width: 300px;
         //font-family: 'Montserrat', sans-serif;
         font-family: 'Futura PT', sans-serif;
         line-height: 30px;
@@ -30,25 +27,29 @@
         }
 
         &__field {
-            width: 495px;
+            width: 300px;
             height: 30px;
             font-family: inherit;
             border: 0;
-            border-bottom: 2px solid #9b9b9b;
+            border-radius: 5px;
+            border: 1px solid #9b9b9b;
             outline: 0;
+
             font-size: 1rem;
             color: black;
-            
             background: transparent;
             transition: border-color 0.2s;
+        }
+
+        &:nth-child(3n+2){
+            float: right;
         }
     }
 
     &-button {
         display: inline-block;
         width: 200px;
-        padding: 10px 6px;
-
+        padding: 15px 6px;
         border-radius: 5px;
         font-family: 'Montserrat', sans-serif;
         font-size: 11px;
@@ -84,4 +85,15 @@
     
         
     }
+}
+
+.full-width{
+    display: block;
+    width: 700px;
+    margin: 15px 0;
+
+    .application-field__field{
+        width: 700px;
+    }
+    
 }

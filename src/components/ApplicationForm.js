@@ -10,8 +10,9 @@ export default function ApplicationForm(props) {
 
     return (
         <div className='application-form'>
-            <h2 className='application-form__title'>{props.name}</h2>
-            {fields.map(field => <ApplicationField title={field.title}/>)}
+
+                <h2 className='application-form__title'>{props.name}</h2>
+                {fields.map(field => <ApplicationField title={field.title} fullWidth={field.fullWidth} required={field.required} />)}
             <div className='application-form-buttons'>
                 <ApplicationButton title='Зарегестрироваться'/>
                 <ApplicationButton title='Отмена'/>

@@ -5,9 +5,9 @@ function App() {
 
   const title = 'Регистрация нового участника'
   const fields = [
-    {title:"Имя"},
-    {title:"Фамилия"},
-    {title:"Отчество"},
+    {title:"Имя", required: true},
+    {title:"Фамилия", required: true},
+    {title:"Отчество", fullWidth: true },
     {title:"Компания"},
     {title:"Должность"},
   ]  
