@@ -10,6 +10,45 @@
             width: 525px;
             margin: 40px auto 0 auto;
         }
+
+        &-complete {
+
+            &__img {
+                background: url('../static/img/index.png') no-repeat center center;
+                height: 300px;
+            }
+
+            &__title {
+                font-family: 'Futura PT', sans-serif;
+                font-size: 20px;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            &__button {
+                margin: 45px auto 0 auto;
+                width: 200px;
+                padding: 15px 6px;
+                border-radius: 5px;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 11px;
+                text-transform: uppercase;
+                text-align: center;
+                letter-spacing: 3px;
+                font-weight: 600;
+                color: white;
+                background: #e95853;
+                box-shadow: 0 8px 15px rgba(0,0,0,.1);
+                transition: .3s;   
+                
+                &:hover {
+                    background: rgb(106, 184, 106);
+                    box-shadow: 0 15px 20px rgba(33, 124, 45, 0.171);
+                    color: white;
+                    transform: translateY(-7px);
+                }
+            }
+        }
     }
 
     &-field {
@@ -20,6 +59,7 @@
         font-family: 'Futura PT', sans-serif;
         line-height: 30px;
         font-size: 20px;
+    
 
         &__title{
             
@@ -76,14 +116,12 @@
 
         &:first-child{
             &:hover {
-                background: rgb(23, 173, 98);
-                box-shadow: 0 15px 20px rgba(46, 229, 156, 0.281);
+                background: rgb(106, 184, 106);
+                box-shadow: 0 15px 20px rgba(33, 124, 45, 0.171);
                 color: white;
                 transform: translateY(-7px);
             }
         }
-    
-        
     }
 }
 
