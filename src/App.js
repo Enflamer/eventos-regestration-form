@@ -10,11 +10,12 @@ function App() {
     {title:"Отчество", fullWidth: true },
     {title:"Компания"},
     {title:"Должность"},
-  ]  
+  ]
+  const token = 'a5w8-d4a8'  
 
   return (
     <div className="wrapper">
-        <ApplicationForm name={title} fields={fields} />
+        <ApplicationForm token={token} name={title} fields={fields} />
     </div>
   );
 }
