@@ -1,97 +1,40 @@
 .application {
-    &-form{
-        padding: 50px;
-        &__title {
-            //font-family: 'Montserrat', sans-serif;
-            font-family: 'Futura PT', sans-serif;
-        }
-
-        &-buttons {
-            width: 525px;
-            margin: 40px auto 0 auto;
-        }
-
-        &-complete {
-
-            &__img {
-                background: url('../static/img/index.png') no-repeat center center;
-                height: 300px;
-            }
-
-            &__title {
-                font-family: 'Futura PT', sans-serif;
-                font-size: 20px;
-                text-align: center;
-                margin-top: 10px;
-            }
-
-            &__button {
-                margin: 45px auto 0 auto;
-                width: 200px;
-                padding: 15px 6px;
-                border-radius: 5px;
-                font-family: 'Montserrat', sans-serif;
-                font-size: 11px;
-                text-transform: uppercase;
-                text-align: center;
-                letter-spacing: 3px;
-                font-weight: 600;
-                color: white;
-                background: #e95853;
-                box-shadow: 0 8px 15px rgba(0,0,0,.1);
-                transition: .3s;   
-                
-                &:hover {
-                    background: rgb(106, 184, 106);
-                    box-shadow: 0 15px 20px rgba(33, 124, 45, 0.171);
-                    color: white;
-                    transform: translateY(-7px);
-                }
-            }
-        }
+  &-form {
+    padding: 50px;
+    &__title {
+      //font-family: 'Montserrat', sans-serif;
+      font-family: "Futura PT", sans-serif;
     }
 
-    &-field {
-        display: inline-block;
-        margin: 20px auto;
-        width: 300px;
-        //font-family: 'Montserrat', sans-serif;
-        font-family: 'Futura PT', sans-serif;
-        line-height: 30px;
+    &-buttons {
+      width: 525px;
+      margin: 40px auto 0 auto;
+    }
+
+    &-complete {
+      &__success {
+        background: url("../static/img/index.png") no-repeat center center;
+        height: 300px;
+      }
+
+      &__failed {
+        background: url("../static/img/index2.png") no-repeat center center;
+        height: 300px;
+      }
+
+      &__title {
+        font-family: "Futura PT", sans-serif;
         font-size: 20px;
-    
+        text-align: center;
+        margin-top: 10px;
+      }
 
-        &__title{
-            
-            margin-bottom: 5px;
-        }
-
-        &__field {
-            width: 300px;
-            height: 30px;
-            font-family: inherit;
-            border: 0;
-            border-radius: 5px;
-            border: 1px solid #9b9b9b;
-            outline: 0;
-
-            font-size: 1rem;
-            color: black;
-            background: transparent;
-            transition: border-color 0.2s;
-        }
-
-        &:nth-child(3n+2){
-            float: right;
-        }
-    }
-
-    &-button {
-        display: inline-block;
+      &__button {
+        margin: 45px auto 0 auto;
         width: 200px;
         padding: 15px 6px;
         border-radius: 5px;
-        font-family: 'Montserrat', sans-serif;
+        font-family: "Montserrat", sans-serif;
         font-size: 11px;
         text-transform: uppercase;
         text-align: center;
@@ -99,39 +42,97 @@
         font-weight: 600;
         color: white;
         background: #e95853;
-        box-shadow: 0 8px 15px rgba(0,0,0,.1);
-        transition: .3s;   
-        
-        &:last-child {
-            float: right;
-            background: white;
-            color: #000;
-            box-shadow: 0 0 0;
-            outline:1px solid #e95853;
-            &:hover {
-                box-shadow: 0 15px 20px rgba(238, 238, 238, 0.4);
-                transform: translateY(-7px);
-            }
-        }
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
 
-        &:first-child{
-            &:hover {
-                background: rgb(106, 184, 106);
-                box-shadow: 0 15px 20px rgba(33, 124, 45, 0.171);
-                color: white;
-                transform: translateY(-7px);
-            }
+        &:hover {
+          background: rgb(106, 184, 106);
+          box-shadow: 0 15px 20px rgba(33, 124, 45, 0.171);
+          color: white;
+          transform: translateY(-7px);
         }
+      }
     }
+  }
+
+  &-field {
+    display: inline-block;
+    margin: 20px auto;
+    width: 300px;
+    //font-family: 'Montserrat', sans-serif;
+    font-family: "Futura PT", sans-serif;
+    line-height: 30px;
+    font-size: 20px;
+
+    &__title {
+      margin-bottom: 5px;
+    }
+
+    &__field {
+      width: 300px;
+      height: 30px;
+      font-family: inherit;
+      border: 0;
+      border-radius: 5px;
+      border: 1px solid #9b9b9b;
+      outline: 0;
+
+      font-size: 1rem;
+      color: black;
+      background: transparent;
+      transition: border-color 0.2s;
+    }
+
+    &:nth-child(3n + 2) {
+      float: right;
+    }
+  }
+
+  &-button {
+    display: inline-block;
+    width: 200px;
+    padding: 15px 6px;
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: white;
+    background: #e95853;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+
+    &:last-child {
+      float: right;
+      background: white;
+      color: #000;
+      box-shadow: 0 0 0;
+      outline: 1px solid #e95853;
+      &:hover {
+        box-shadow: 0 15px 20px rgba(238, 238, 238, 0.4);
+        transform: translateY(-7px);
+      }
+    }
+
+    &:first-child {
+      &:hover {
+        background: rgb(106, 184, 106);
+        box-shadow: 0 15px 20px rgba(33, 124, 45, 0.171);
+        color: white;
+        transform: translateY(-7px);
+      }
+    }
+  }
 }
 
-.full-width{
-    display: block;
-    width: 700px;
-    margin: 15px 0;
+.full-width {
+  display: block;
+  width: 700px;
+  margin: 15px 0;
 
-    .application-field__field{
-        width: 700px;
-    }
-    
+  .application-field__field {
+    width: 700px;
+  }
 }
