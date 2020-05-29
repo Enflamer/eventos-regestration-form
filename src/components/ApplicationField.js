@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function ApplicationField(props) {
+    const [value, setValue] = useState("")
+
     const changeHandler = (value) => {
+        setValue(value)
         props.inputHandler(props.field.name, value);
     };
 
@@ -16,6 +19,7 @@ export default function ApplicationField(props) {
             <div className="application-field__title">{props.field.title}:</div>
             <input
                 className="application-field__field"
+                value={value}
                 placeholder={
                     props.field.required
                         ? props.field.title + "*"

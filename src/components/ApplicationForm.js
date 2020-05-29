@@ -19,10 +19,12 @@ export default function ApplicationForm(props) {
 
     const inputHandler = (title, value) => {
         setFormValues({...formValues, [title]:value})
+        console.log(formValues)
     };
 
     const handler = () => {
         setIsLoading(true);
+        console.log(formValues)
         axios
             .post(
                 "https://form.eventos42.ru/api/form/" + token,
@@ -56,6 +58,7 @@ export default function ApplicationForm(props) {
                 <input type='text' value={lastName} onChange={e => setLastName(e.target.value)} required/> */}
             {fields.map((field) => (
                 <ApplicationField
+                    formValues={formValues}
                     inputHandler={inputHandler}
                     field={field}
                     key={field.title}
