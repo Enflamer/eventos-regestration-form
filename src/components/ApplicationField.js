@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 
 export default function ApplicationField(props) {
-    const [value, setValue] = useState("")
-
-    const changeHandler = (value) => {
-        setValue(value)
-        props.inputHandler(props.field.name, value);
-    };
 
     return (
         <div
@@ -19,14 +13,14 @@ export default function ApplicationField(props) {
             <div className="application-field__title">{props.field.title}:</div>
             <input
                 className="application-field__field"
-                value={value}
+                value={props.value? props.value : ""}
                 placeholder={
                     props.field.required
                         ? props.field.title + "*"
                         : props.field.title
                 }
                 type="text"
-                onChange={(e) => changeHandler(e.target.value)}
+                onChange={(e) => props.inputHandler(props.field.name, e.target.value)}
             />
         </div>
     );
