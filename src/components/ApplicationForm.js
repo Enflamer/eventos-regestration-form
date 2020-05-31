@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, createRef } from "react";
 import ApplicationField from "./ApplicationField";
 import ApplicationButton from "./ApplicationButton";
 import ApplicationFormComplete from "./ApplicationFormComplete";
-import ApplicationLoader from './ApplicationLoader'
+import ApplicationLoader from "./ApplicationLoader";
 import Modal from "react-modal";
 import axios from "axios";
 import "../styles/ApplicationForm.scss";
@@ -14,39 +14,41 @@ export default function ApplicationForm(props) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [formValues, setFormValues] = useState({});
-    const [isRejectedResponse, setIsRejectedResponse] = useState(false)
-    const token = 'c23df3af-d0e0-4e32-b4aa-2b8f36c65d0b';
+    const [isRejectedResponse, setIsRejectedResponse] = useState(false);
+    const token = "0f9ab1dc-c782-4cc9-9215-1ecab69c42d7";
 
     const inputHandler = (title, value) => {
-        setFormValues({...formValues, [title]:value})
+        setFormValues({ ...formValues, [title]: value });
+    };
+
+    const handleSendForm = (event) => {
+        if (event.charCode == 13) {
+            handler()
+        }
     };
 
     const handler = () => {
         setIsLoading(true);
         axios
-            .post(
-                "https://form.eventos42.ru/api/form/" + token,
-                {
-                    firstName: formValues["firstName"],
-                    lastName: formValues["lastName"],
-                    middleName: formValues["middleName"],
-                    extended: {
-                        company: formValues["company"],
-                        jobPosition: formValues["jobPosition"],
-                    },
-                }
-            )
-            .then(() => {
+            .post("https://form.eventos42.ru/api/form/" + token, {
+                firstName: formValues["firstName"],
+                lastName: formValues["lastName"],
+                middleName: formValues["middleName"],
+                extended: {
+                    company: formValues["company"],
+                    jobPosition: formValues["jobPosition"],
+                },
+            })
+            .then(data => {
                 setIsLoading(false);
-                setIsRejectedResponse(false)
+                setIsRejectedResponse(false);
                 setModalIsOpen(true);
             })
-            .catch(() => {
+            .catch(data => {
                 setIsLoading(false);
-                setIsRejectedResponse(true)
+                setIsRejectedResponse(true);
                 setModalIsOpen(true);
-            })
-        
+            });
     };
 
     return (
@@ -56,7 +58,7 @@ export default function ApplicationForm(props) {
                 <input type='text' value={lastName} onChange={e => setLastName(e.target.value)} required/> */}
             {fields.map((field) => (
                 <ApplicationField
-                    value={formValues[field.name]}
+                    handleSendForm={handleSendForm}
                     inputHandler={inputHandler}
                     field={field}
                     key={field.title}
@@ -88,7 +90,7 @@ export default function ApplicationForm(props) {
                     onClick={() => setModalIsOpen(false)}
                 />
             </Modal>
-            {isLoading?<ApplicationLoader/>:null}
+            {isLoading ? <ApplicationLoader /> : null}
         </div>
     );
 }

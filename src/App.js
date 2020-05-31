@@ -4,11 +4,11 @@ import ApplicationForm from "./components/ApplicationForm";
 function App() {
     const title = "Регистрация нового участника";
     const fields = [
-        { name: "lastName", title: "Фамилия", required: true },
         { name: "firstName", title: "Имя", required: true },
+        { name: "lastName", title: "Фамилия", required: true },
         { name: "middleName", title: "Отчество", fullWidth: true },
-        { name: "company", title: "Компания" },
         { name: "jobPosition", title: "Должность" },
+        { name: "company", title: "Компания" },
     ];
 
     return (

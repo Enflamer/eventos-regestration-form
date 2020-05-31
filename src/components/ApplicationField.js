@@ -12,8 +12,9 @@ export default function ApplicationField(props) {
         >
             <div className="application-field__title">{props.field.title}:</div>
             <input
+                onKeyPress={props.handleSendForm}
                 className="application-field__field"
-                value={props.value? props.value : ""}
+                defaultValue={props.value}
                 placeholder={
                     props.field.required
                         ? props.field.title + "*"
