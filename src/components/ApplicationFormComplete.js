@@ -13,7 +13,7 @@ export default function ApplicationFormComplete(props) {
         <div className="application-form-complete">
             {props.isRejectedResponse? <div className="application-form-complete__failed" /> :<div className="application-form-complete__success" />}
             <div className="application-form-complete__title">
-                {props.isRejectedResponse?<div>Пользователь уже существует</div>:<div>Регестрация прошла успешно</div>}
+                {props.isRejectedResponse?<div>{props.errorMessage}</div>:<div>Регестрация прошла успешно</div>}
             </div>
             <div
                 className="application-form-complete__button"

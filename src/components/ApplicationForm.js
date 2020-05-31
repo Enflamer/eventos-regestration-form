@@ -15,6 +15,7 @@ export default function ApplicationForm(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [formValues, setFormValues] = useState({});
     const [isRejectedResponse, setIsRejectedResponse] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('')
     const token = "0f9ab1dc-c782-4cc9-9215-1ecab69c42d7";
 
     const inputHandler = (title, value) => {
@@ -45,6 +46,8 @@ export default function ApplicationForm(props) {
                 setModalIsOpen(true);
             })
             .catch(data => {
+                setErrorMessage(data.response.data.message)
+                console.log(data.response.data.message)
                 setIsLoading(false);
                 setIsRejectedResponse(true);
                 setModalIsOpen(true);
@@ -86,6 +89,7 @@ export default function ApplicationForm(props) {
                 onRequestClose={() => setModalIsOpen(false)}
             >
                 <ApplicationFormComplete
+                    errorMessage={errorMessage}
                     isRejectedResponse={isRejectedResponse}
                     onClick={() => setModalIsOpen(false)}
                 />
