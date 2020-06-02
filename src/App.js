@@ -7,8 +7,8 @@ function App() {
         { name: "firstName", title: "Имя", required: true },
         { name: "lastName", title: "Фамилия", required: true },
         { name: "middleName", title: "Отчество", fullWidth: true },
-        { name: "jobPosition", title: "Должность" },
-        { name: "company", title: "Компания" },
+        { name: "jobPosition", title: "Должность", default: "Майор" },
+        { name: "company", title: "Компания", default: "ФСБ" },
     ];
 
     return (

@@ -17,9 +17,10 @@ export default function ApplicationForm(props) {
     const [isRejectedResponse, setIsRejectedResponse] = useState(false);
     const [errorMessage, setErrorMessage] = useState('')
     const token = "0f9ab1dc-c782-4cc9-9215-1ecab69c42d7";
-
+    
     const inputHandler = (title, value) => {
         setFormValues({ ...formValues, [title]: value });
+        console.log(formValues)
     };
 
     const handleSendForm = (event) => {
@@ -64,6 +65,7 @@ export default function ApplicationForm(props) {
                     handleSendForm={handleSendForm}
                     inputHandler={inputHandler}
                     field={field}
+                    value={field.default ? field.default : field.value}
                     key={field.title}
                 />
             ))}

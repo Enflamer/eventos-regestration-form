@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
 export default function ApplicationField(props) {
-
+    const changeHandler = (value) => {
+        props.inputHandler(props.field.name, value);
+    };
     return (
         <div
             className={
@@ -14,7 +16,7 @@ export default function ApplicationField(props) {
             <input
                 onKeyPress={props.handleSendForm}
                 className="application-field__field"
-                defaultValue={props.value}
+                value={props.value}
                 placeholder={
                     props.field.required
                         ? props.field.title + "*"
