@@ -1,4 +1,4 @@
-import React, { useState, createRef } from "react";
+import React, { useState, useEffect } from "react";
 import ApplicationField from "./ApplicationField";
 import ApplicationButton from "./ApplicationButton";
 import ApplicationFormComplete from "./ApplicationFormComplete";
@@ -10,22 +10,33 @@ import "../styles/ApplicationForm.scss";
 Modal.setAppElement("#root");
 
 export default function ApplicationForm(props) {
-    const [fields] = useState(props.fields);
+    const [fields,setFields] = useState(props.fields);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [formValues, setFormValues] = useState({});
     const [isRejectedResponse, setIsRejectedResponse] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('')
+    const [errorMessage, setErrorMessage] = useState("");
     const token = "0f9ab1dc-c782-4cc9-9215-1ecab69c42d7";
-    
-    const inputHandler = (title, value) => {
-        setFormValues({ ...formValues, [title]: value });
-        console.log(formValues)
+    const keys = Object.keys(props.fields)
+
+    useEffect(() => setFields(makeDefaultFormValue(props.fields)), []);
+
+    //console.log(fields)
+
+    const makeDefaultFormValue = (fields) => {
+        const some =  Object.fromEntries(keys.map((key) => {
+            return([key, { ...fields[key], value: fields[key].default ?? "" }]);
+        }));
+        console.log(some)
+        return some;
+    };
+
+    const inputHandler = (name, value) => {
+        setFields({...fields[name], [fields.name]: value});
     };
 
     const handleSendForm = (event) => {
         if (event.charCode == 13) {
-            handler()
+            handler();
         }
     };
 
@@ -33,22 +44,22 @@ export default function ApplicationForm(props) {
         setIsLoading(true);
         axios
             .post("https://form.eventos42.ru/api/form/" + token, {
-                firstName: formValues["firstName"],
-                lastName: formValues["lastName"],
-                middleName: formValues["middleName"],
+                firstName: fields["firstName"],
+                lastName: fields["lastName"],
+                middleName: fields["middleName"],
                 extended: {
-                    company: formValues["company"],
-                    jobPosition: formValues["jobPosition"],
+                    company: fields["company"],
+                    jobPosition: fields["jobPosition"],
                 },
             })
-            .then(data => {
+            .then((data) => {
                 setIsLoading(false);
                 setIsRejectedResponse(false);
                 setModalIsOpen(true);
             })
-            .catch(data => {
-                setErrorMessage(data.response.data.message)
-                console.log(data.response.data.message)
+            .catch((data) => {
+                setErrorMessage(data.response.data.message);
+                console.log(data.response.data.message);
                 setIsLoading(false);
                 setIsRejectedResponse(true);
                 setModalIsOpen(true);
@@ -58,21 +69,19 @@ export default function ApplicationForm(props) {
     return (
         <div className="application-form">
             <h2 className="application-form__title">{props.name}</h2>
-            {/* <input type='text' value={firstName} onChange={e => setFirstName(e.target.value)} required/>
-                <input type='text' value={lastName} onChange={e => setLastName(e.target.value)} required/> */}
-            {fields.map((field) => (
+            {keys.map((key) => (
+               // console.log(fields),
                 <ApplicationField
                     handleSendForm={handleSendForm}
                     inputHandler={inputHandler}
-                    field={field}
-                    value={field.default ? field.default : field.value}
-                    key={field.title}
+                    field={fields[key]}
+                    key={fields[key].name}
                 />
             ))}
             <div className="application-form-buttons">
                 <ApplicationButton
                     onClick={handler}
-                    title="Зарегестрироваться"
+                    title="Зарегистрироваться"
                 />
                 <ApplicationButton title="Отмена" />
             </div>

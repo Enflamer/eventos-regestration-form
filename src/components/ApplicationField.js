@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 
 export default function ApplicationField(props) {
-    const changeHandler = (value) => {
-        props.inputHandler(props.field.name, value);
-    };
     return (
         <div
             className={
@@ -12,17 +9,17 @@ export default function ApplicationField(props) {
                     : "application-field"
             }
         >
-            <div className="application-field__title">{props.field.title}:</div>
+            <div className="application-field__title">{props.field.label}:</div>
             <input
                 onKeyPress={props.handleSendForm}
                 className="application-field__field"
-                value={props.value}
+                value={props.field.value}
                 placeholder={
                     props.field.required
-                        ? props.field.title + "*"
-                        : props.field.title
+                        ? props.field.label + "*"
+                        : props.field.label
                 }
-                type="text"
+                
                 onChange={(e) => props.inputHandler(props.field.name, e.target.value)}
             />
         </div>

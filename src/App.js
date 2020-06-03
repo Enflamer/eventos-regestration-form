@@ -4,16 +4,24 @@ import ApplicationForm from "./components/ApplicationForm";
 function App() {
     const title = "Регистрация нового участника";
     const fields = [
-        { name: "firstName", title: "Имя", required: true },
-        { name: "lastName", title: "Фамилия", required: true },
-        { name: "middleName", title: "Отчество", fullWidth: true },
-        { name: "jobPosition", title: "Должность", default: "Майор" },
-        { name: "company", title: "Компания", default: "ФСБ" },
+        { name: "firstName", label: "Имя", required: true },
+        { name: "lastName", label: "Фамилия", required: true },
+        { name: "middleName", label: "Отчество", fullWidth: true },
+        { name: "jobPosition", label: "Должность", default: "Майор" },
+        { name: "company", label: "Компания", default: "ФСБ" },
     ];
+
+   
+
+    const objectFields = Object.fromEntries(fields.map(field => {
+        return [field.name, field]
+    }))
+
+    //console.log(objectFields)
 
     return (
         <div className="wrapper">
-            <ApplicationForm name={title} fields={fields} />
+            <ApplicationForm title={title} fields={objectFields} />
         </div>
     );
 }
