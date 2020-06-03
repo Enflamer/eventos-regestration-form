@@ -35,6 +35,7 @@ export default function ApplicationForm(props) {
                 }
                 return item;
             }))
+            console.log(fields)
     };
 
     const handleSendForm = (event) => {
