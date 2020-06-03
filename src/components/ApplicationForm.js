@@ -1,4 +1,4 @@
-import React, { useState, createRef } from "react";
+import React, { useState, useEffect } from "react";
 import ApplicationField from "./ApplicationField";
 import ApplicationButton from "./ApplicationButton";
 import ApplicationFormComplete from "./ApplicationFormComplete";
