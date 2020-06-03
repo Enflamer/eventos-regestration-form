@@ -13,7 +13,7 @@ function App() {
 
     return (
         <div className="wrapper">
-            <ApplicationForm name={title} fields={fields} />
+            <ApplicationForm title={title} fields={fields} />
         </div>
     );
 }

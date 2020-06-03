@@ -10,17 +10,31 @@ import "../styles/ApplicationForm.scss";
 Modal.setAppElement("#root");
 
 export default function ApplicationForm(props) {
-    const [fields] = useState(props.fields);
+    const [fields,setFields] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [formValues, setFormValues] = useState({});
     const [isRejectedResponse, setIsRejectedResponse] = useState(false);
     const [errorMessage, setErrorMessage] = useState('')
     const token = "0f9ab1dc-c782-4cc9-9215-1ecab69c42d7";
-    
-    const inputHandler = (title, value) => {
-        setFormValues({ ...formValues, [title]: value });
-        console.log(formValues)
+
+    useEffect(() => setFields(makeDefaultFormValue(props.fields)), []);
+
+    const makeDefaultFormValue = (fields) => {
+        return fields.map((field) => {
+            return({ ...field, value: field.default ?? "" });
+        });
+    };
+
+   
+    const inputHandler = (name, value) => {
+        setFields(
+            fields.map((item) => {
+                if(item.name===name){
+                   return {...item, value}
+                }
+                return item;
+            }))
     };
 
     const handleSendForm = (event) => {
@@ -31,6 +45,7 @@ export default function ApplicationForm(props) {
 
     const handler = () => {
         setIsLoading(true);
+
         axios
             .post("https://form.eventos42.ru/api/form/" + token, {
                 firstName: formValues["firstName"],
@@ -58,15 +73,12 @@ export default function ApplicationForm(props) {
     return (
         <div className="application-form">
             <h2 className="application-form__title">{props.name}</h2>
-            {/* <input type='text' value={firstName} onChange={e => setFirstName(e.target.value)} required/>
-                <input type='text' value={lastName} onChange={e => setLastName(e.target.value)} required/> */}
             {fields.map((field) => (
-                <ApplicationField
+                 <ApplicationField
                     handleSendForm={handleSendForm}
                     inputHandler={inputHandler}
                     field={field}
-                    value={field.default ? field.default : field.value}
-                    key={field.title}
+                    key={field.name}
                 />
             ))}
             <div className="application-form-buttons">
