@@ -10,37 +10,42 @@ import "../styles/ApplicationForm.scss";
 Modal.setAppElement("#root");
 
 export default function ApplicationForm(props) {
-    const [fields,setFields] = useState([]);
+    const [formValues, setFormValues] = useState({});
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [formValues, setFormValues] = useState({});
     const [isRejectedResponse, setIsRejectedResponse] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('')
+    const [errorMessage, setErrorMessage] = useState("");
     const token = "0f9ab1dc-c782-4cc9-9215-1ecab69c42d7";
 
-    useEffect(() => setFields(makeDefaultFormValue(props.fields)), []);
+    useEffect(() => setFormValues(makeDefaultFormValue(props.fields)), []);
 
     const makeDefaultFormValue = (fields) => {
-        return fields.map((field) => {
-            return({ ...field, value: field.default ?? "" });
-        });
-    };
+        return Object.fromEntries(fields.map((field) => {
+            return [field.name, field.default ?? ""];
+        }));
 
-   
+        // return fields.map((field) => {
+        //     return({ ...field, value: field.default ?? "" });
+        // });
+    };
+    console.log(formValues);
+
     const inputHandler = (name, value) => {
-        setFields(
-            fields.map((item) => {
-                if(item.name===name){
-                   return {...item, value}
-                }
-                return item;
-            }))
-            console.log(fields)
+        setFormValues({...formValues, [name]:value})
+
+        // setFormValues(
+        //     formValues.map((item) => {
+        //         if (item.name === name) {
+        //             return { ...item, value };
+        //         }
+        //         return item;
+        //     })
+        // );
     };
 
     const handleSendForm = (event) => {
         if (event.charCode == 13) {
-            handler()
+            handler();
         }
     };
 
@@ -57,14 +62,14 @@ export default function ApplicationForm(props) {
                     jobPosition: formValues["jobPosition"],
                 },
             })
-            .then(data => {
+            .then((data) => {
                 setIsLoading(false);
                 setIsRejectedResponse(false);
                 setModalIsOpen(true);
             })
-            .catch(data => {
-                setErrorMessage(data.response.data.message)
-                console.log(data.response.data.message)
+            .catch((data) => {
+                setErrorMessage(data.response.data.message);
+                console.log(data.response.data.message);
                 setIsLoading(false);
                 setIsRejectedResponse(true);
                 setModalIsOpen(true);
@@ -74,18 +79,19 @@ export default function ApplicationForm(props) {
     return (
         <div className="application-form">
             <h2 className="application-form__title">{props.name}</h2>
-            {fields.map((field) => (
-                 <ApplicationField
+            {props.fields.map(field => (
+                <ApplicationField
                     handleSendForm={handleSendForm}
                     inputHandler={inputHandler}
                     field={field}
+                    value={formValues[field.name]}
                     key={field.name}
                 />
             ))}
             <div className="application-form-buttons">
                 <ApplicationButton
                     onClick={handler}
-                    title="Зарегестрироваться"
+                    title="Зарегистрироваться"
                 />
                 <ApplicationButton title="Отмена" />
             </div>
