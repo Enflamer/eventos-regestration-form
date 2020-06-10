@@ -20,9 +20,11 @@ export default function ApplicationForm(props) {
     useEffect(() => setFormValues(makeDefaultFormValue(props.fields)), []);
 
     const makeDefaultFormValue = (fields) => {
-        return Object.fromEntries(fields.map((field) => {
-            return [field.name, field.default ?? ""];
-        }));
+        return Object.fromEntries(
+            fields.map((field) => {
+                return [field.name, field.default ?? ""];
+            })
+        );
 
         // return fields.map((field) => {
         //     return({ ...field, value: field.default ?? "" });
@@ -31,7 +33,7 @@ export default function ApplicationForm(props) {
     console.log(formValues);
 
     const inputHandler = (name, value) => {
-        setFormValues({...formValues, [name]:value})
+        setFormValues({ ...formValues, [name]: value });
 
         // setFormValues(
         //     formValues.map((item) => {
@@ -44,9 +46,11 @@ export default function ApplicationForm(props) {
     };
 
     const handleSendForm = (event) => {
+        alert("A name was submitted: ");
         if (event.charCode == 13) {
             handler();
         }
+        event.preventDefault();
     };
 
     const handler = () => {
@@ -78,19 +82,25 @@ export default function ApplicationForm(props) {
 
     return (
         <div className="application-form">
-            <h2 className="application-form__title">{props.name}</h2>
-            {props.fields.map(field => (
-                <ApplicationField
-                    handleSendForm={handleSendForm}
-                    inputHandler={inputHandler}
-                    field={field}
-                    value={formValues[field.name]}
-                    key={field.name}
-                />
-            ))}
+            <h2 className="application-form__title">{props.title}</h2>
+            <form
+                onSubmit={handleSendForm}
+                className="application-form-wrapper"
+            >
+                {props.fields.map((field) => (
+                    <ApplicationField
+                        //handleSendForm={handleSendForm}
+                        inputHandler={inputHandler}
+                        field={field}
+                        value={formValues[field.name]}
+                        key={field.name}
+                    />
+                ))}
+            </form>
             <div className="application-form-buttons">
                 <ApplicationButton
-                    onClick={handler}
+                    type="button"
+                    //onClick={handler}
                     title="Зарегистрироваться"
                 />
                 <ApplicationButton title="Отмена" />
