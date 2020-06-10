@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ApplicationField from "./ApplicationField";
-import ApplicationButton from "./ApplicationButton";
 import ApplicationFormComplete from "./ApplicationFormComplete";
 import ApplicationLoader from "./ApplicationLoader";
 import Modal from "react-modal";
@@ -15,7 +14,7 @@ export default function ApplicationForm(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [isRejectedResponse, setIsRejectedResponse] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const token = "0f9ab1dc-c782-4cc9-9215-1ecab69c42d7";
+    const token = "b2f5d122-45a8-443b-b028-84ce6c6a4594";
 
     useEffect(() => setFormValues(makeDefaultFormValue(props.fields)), []);
 
@@ -25,31 +24,15 @@ export default function ApplicationForm(props) {
                 return [field.name, field.default ?? ""];
             })
         );
-
-        // return fields.map((field) => {
-        //     return({ ...field, value: field.default ?? "" });
-        // });
     };
     console.log(formValues);
 
     const inputHandler = (name, value) => {
         setFormValues({ ...formValues, [name]: value });
-
-        // setFormValues(
-        //     formValues.map((item) => {
-        //         if (item.name === name) {
-        //             return { ...item, value };
-        //         }
-        //         return item;
-        //     })
-        // );
     };
 
     const handleSendForm = (event) => {
-        alert("A name was submitted: ");
-        if (event.charCode == 13) {
-            handler();
-        }
+        handler();
         event.preventDefault();
     };
 
@@ -89,22 +72,32 @@ export default function ApplicationForm(props) {
             >
                 {props.fields.map((field) => (
                     <ApplicationField
-                        //handleSendForm={handleSendForm}
                         inputHandler={inputHandler}
                         field={field}
                         value={formValues[field.name]}
                         key={field.name}
                     />
                 ))}
+
+                <div className="application-form-buttons">
+                    <button
+                        type={"submit"}
+                        className="application-button"
+                        onClick={props.onClick}
+                    >
+                        <div className="application-button__title">
+                             Зарегистрироваться
+                        </div>
+                    </button>
+                    <button
+                        className="application-button"
+                    >
+                        <div className="application-button__title">
+                            Отмена
+                        </div>
+                    </button>
+                </div>
             </form>
-            <div className="application-form-buttons">
-                <ApplicationButton
-                    type="button"
-                    //onClick={handler}
-                    title="Зарегистрироваться"
-                />
-                <ApplicationButton title="Отмена" />
-            </div>
             <Modal
                 style={{
                     overlay: {
