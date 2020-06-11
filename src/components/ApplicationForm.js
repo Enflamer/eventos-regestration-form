@@ -21,10 +21,14 @@ export default function ApplicationForm(props) {
     const makeDefaultFormValue = (fields) => {
         return Object.fromEntries(
             fields.map((field) => {
-                return [field.name, field.default ?? ""];
+                return [
+                    field.name || field.systemField,
+                    field.defaultValue ?? "",
+                ];   
             })
         );
     };
+
     console.log(formValues);
 
     const inputHandler = (name, value) => {
@@ -74,8 +78,8 @@ export default function ApplicationForm(props) {
                     <ApplicationField
                         inputHandler={inputHandler}
                         field={field}
-                        value={formValues[field.name]}
-                        key={field.name}
+                        value={formValues[field.systemField || field.name]}
+                        key={field.label}
                     />
                 ))}
 
@@ -86,15 +90,11 @@ export default function ApplicationForm(props) {
                         onClick={props.onClick}
                     >
                         <div className="application-button__title">
-                             Зарегистрироваться
+                            Зарегистрироваться
                         </div>
                     </button>
-                    <button
-                        className="application-button"
-                    >
-                        <div className="application-button__title">
-                            Отмена
-                        </div>
+                    <button className="application-button">
+                        <div className="application-button__title">Отмена</div>
                     </button>
                 </div>
             </form>
