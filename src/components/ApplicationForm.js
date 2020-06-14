@@ -30,12 +30,9 @@ export default function ApplicationForm(props) {
                 obj.extended[field.name] = formValues[field.name]
             }
         }) 
-
-        console.log(obj)
         return obj
     }
-    parseValues()
-
+    
     const makeDefaultFormValue = (fields) => {
         return Object.fromEntries(
             fields.map((field) => {
