@@ -14,9 +14,27 @@ export default function ApplicationForm(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [isRejectedResponse, setIsRejectedResponse] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const token = "b2f5d122-45a8-443b-b028-84ce6c6a4594";
+    const token = "32573222-5c4c-44e4-84de-985629ac6fd7";
 
     useEffect(() => setFormValues(makeDefaultFormValue(props.fields)), []);
+    
+    const parseValues = () => {
+        const obj = {extended: {}};
+        const keys = Object.keys(formValues)
+
+        props.fields.forEach((field, index) => {
+            if(field.systemField!==null && field.systemField === keys[index]){
+                obj[field.systemField] = formValues[field.systemField]
+            }
+            if(field.name!==null && field.name === keys[index]){
+                obj.extended[field.name] = formValues[field.name]
+            }
+        }) 
+
+        console.log(obj)
+        return obj
+    }
+    parseValues()
 
     const makeDefaultFormValue = (fields) => {
         return Object.fromEntries(
@@ -44,15 +62,7 @@ export default function ApplicationForm(props) {
         setIsLoading(true);
 
         axios
-            .post("https://form.eventos42.ru/api/form/" + token, {
-                firstName: formValues["firstName"],
-                lastName: formValues["lastName"],
-                middleName: formValues["middleName"],
-                extended: {
-                    company: formValues["company"],
-                    jobPosition: formValues["jobPosition"],
-                },
-            })
+            .post("https://form.eventos42.ru/api/form/" + token, parseValues())
             .then((data) => {
                 setIsLoading(false);
                 setIsRejectedResponse(false);

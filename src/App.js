@@ -15,7 +15,7 @@ function App() {
     const [fields, setFields] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const token = "b2f5d122-45a8-443b-b028-84ce6c6a4594";
+    const token = "32573222-5c4c-44e4-84de-985629ac6fd7";
     const url = "https://form.eventos42.ru/api/form/";
 
     useEffect(() => getFields(), []);
